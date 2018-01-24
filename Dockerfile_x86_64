@@ -1,0 +1,26 @@
+ARG ARCH=frommakefile
+ARG DOCKERSRC=frommakefile
+ARG USERNAME=frommakefile
+#
+FROM ${USERNAME}/${DOCKERSRC}:${ARCH}
+#
+ARG AMVERSION=5.15.2
+#
+ENV ACTIVEMQ_HOME=/opt/activemq
+#
+RUN set -xe \
+    && mkdir -p /opt \
+    && curl -o /tmp/apache-activemq.tar.gz -SL https://www.apache.org/dist/activemq/${AMVERSION}/apache-activemq-${AMVERSION}-bin.tar.gz \
+    && tar -C /opt -xzf /tmp/apache-activemq.tar.gz \
+    && ln -s /opt/apache-activemq-${AMVERSION} ${ACTIVEMQ_HOME} \
+    && chown -Rh alpine:alpine /opt/*activemq* \
+    && rm -rf /var/cache/apk/* /tmp/*
+#
+ENV PATH=$ACTIVEMQ_HOME/bin:$PATH
+COPY root/ /
+#
+VOLUME /opt/activemq/data/ /opt/activemq/conf/ /opt/activemq/webapps/
+#
+EXPOSE 1883 5672 8161 61613 61614 61616
+#
+ENTRYPOINT ["/init"]
