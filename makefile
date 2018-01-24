@@ -85,7 +85,7 @@ stop :
 
 test :
 	# test armhf in real device
-	if [ "$(ARCH)" != "armhf" ]; then docker run --rm -it $(NAMEFLAGS) $(RUNFLAGS) $(PORTFLAGS) $(MOUNTFLAGS) $(OTHERFLAGS) $(IMAGETAG) 'configtest'; fi;
+	if [ "$(ARCH)" != "armhf" ]; then docker run --rm -it $(NAMEFLAGS) $(RUNFLAGS) $(PORTFLAGS) $(MOUNTFLAGS) $(OTHERFLAGS) $(IMAGETAG) sh -ec 'sleep 15; /opt/activemq/bin/activemq --version'; fi;
 
 # -- }}}
 
