@@ -8,7 +8,7 @@ This [image][233] containerizes Apache [ActiveMQ][135] server, for
 applications / services that require a pub-sub message queue
 , running under [OpenJDK][136] 8.\*.\*.
 
-Current stable version is `5.15.3`.
+Current stable version is `5.15.5`.
 
 Based on [Alpine Linux][131]  from my [alpine-openjdk8][132] image with the [s6][133] init system
 and GNU LibC [overlayed][134] in it.
