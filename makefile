@@ -92,8 +92,9 @@ stop :
 	docker stop -t 2 docker_$(CNTNAME)
 
 test :
-	# test armhf in real device
-	if [ "$(ARCH)" != "armhf" ]; then docker run --rm -it $(NAMEFLAGS) $(RUNFLAGS) $(PORTFLAGS) $(MOUNTFLAGS) $(OTHERFLAGS) $(IMAGETAG) sh -ec 'sleep 15; /opt/activemq/bin/activemq --version'; fi;
+	# test armhf in real device 
+	# actually wait a minute until activemq comes up properly to avoid the java.lang.InterruptedException
+	if [ "$(ARCH)" != "armhf" ]; then docker run --rm -it $(NAMEFLAGS) $(RUNFLAGS) $(PORTFLAGS) $(MOUNTFLAGS) $(OTHERFLAGS) $(IMAGETAG) sh -ec 'sleep 60; /opt/activemq/bin/activemq --version'; fi;
 
 # -- }}}
 
