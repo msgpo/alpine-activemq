@@ -9,6 +9,7 @@ ARG AMVERSION=5.15.2
 ENV ACTIVEMQ_HOME=/opt/activemq
 #
 RUN set -xe \
+    && apk add -uU nss \
     && mkdir -p /opt \
     && curl -o /tmp/apache-activemq.tar.gz -SL https://www.apache.org/dist/activemq/${AMVERSION}/apache-activemq-${AMVERSION}-bin.tar.gz \
     && tar -C /opt -xzf /tmp/apache-activemq.tar.gz \
